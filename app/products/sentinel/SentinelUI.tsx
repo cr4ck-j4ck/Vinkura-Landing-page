@@ -4,93 +4,87 @@ import React from 'react';
 
 const SentinelUI = () => {
    return (
-      <main className="sentinel-page bg-white text-black text-left">
+      <main className="s-page">
          {/* 1. HERO SECTION */}
-         <section className="hero-section text-left border-b">
-            <div className="container">
-               <div className="hero-header">
-                  <span className="eyebrow">Strategic Intelligence Layer</span>
-                  <h1 className="product-title">Vinkura Sentinel</h1>
-                  <p className="hero-summary">
-                     The official intelligence layer for high-consequence <br className="desktop-only" />
-                     public systems and operational command.
-                  </p>
-               </div>
-
-               <div className="hero-visual">
-               </div>
+         <section className="s-hero">
+            <div className="s-container">
+               <span className="s-eyebrow">Strategic Intelligence Layer</span>
+               <h1 className="s-hero-title">Vinkura Sentinel</h1>
+               <p className="s-hero-sub">
+                  The official intelligence layer for high-consequence public systems and operational command.
+               </p>
             </div>
          </section>
 
          {/* 2. PRODUCT THESIS */}
-         <section className="thesis-section text-left border-b">
-            <div className="container">
-               <h2 className="section-title">From fragmented records <br className="desktop-only" /> to operational context</h2>
-               <p className="thesis-text">
+         <section className="s-section s-border-b">
+            <div className="s-container">
+               <h2 className="s-headline">From fragmented records to operational context</h2>
+               <p className="s-body-text">
                   Sentinel turns fragmented records, logs, field signals, and official datasets into searchable, connected operational context for command, supervision, and response. It is the digital twin of your organization's decision environment.
                </p>
             </div>
          </section>
 
          {/* 3. CAPABILITIES */}
-         <section className="capabilities-section border-b text-left">
-            <div className="container">
-               <h3 className="section-title small">Beyond dashboards. <br /> Integrated Reality.</h3>
-               <p className="body-subtext">
+         <section className="s-section s-border-b">
+            <div className="s-container">
+               <h3 className="s-sub-headline">Beyond dashboards. Integrated Reality.</h3>
+               <p className="s-body-text" style={{ maxWidth: '700px', marginBottom: '4rem' }}>
                   Traditional dashboards describe the past. Sentinel connects records, entities, movements, and operational signals into a system that supports decisions—not just reporting.
                </p>
-               <div className="cap-grid">
-                  <div className="cap-card">
-                     <h4>Entity-linked search</h4>
-                     <p>Search across fragmented datasets to find people, objects, and events linked across departments.</p>
+               <div className="s-grid-2">
+                  <div className="s-card">
+                     <h4 className="s-card-title">Entity-linked search</h4>
+                     <p className="s-card-text">Search across fragmented datasets to find people, objects, and events linked across departments.</p>
                   </div>
-                  <div className="cap-card">
-                     <h4>Relationship mapping</h4>
-                     <p>Visualize connections across records and actors to understand official patterns.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">Relationship mapping</h4>
+                     <p className="s-card-text">Visualize connections across records and actors to understand official patterns.</p>
                   </div>
-                  <div className="cap-card">
-                     <h4>Command-level visibility</h4>
-                     <p>Aggregated operational signals that provide real-time context for command and response.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">Command-level visibility</h4>
+                     <p className="s-card-text">Aggregated operational signals that provide real-time context for command and response.</p>
                   </div>
-                  <div className="cap-card">
-                     <h4>Auditable intelligence</h4>
-                     <p>Every insight and link is traceable back to its source record, ensuring official accountability.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">Auditable intelligence</h4>
+                     <p className="s-card-text">Every insight and link is traceable back to its source record, ensuring official accountability.</p>
                   </div>
                </div>
             </div>
          </section>
 
          {/* 4. FOUNDATION RAILS */}
-         <section className="rails-section bg-black text-white text-left">
-            <div className="container border-b-white">
-               <h2 className="section-title white">A multidisciplinary foundation <br className="desktop-only" /> for official command</h2>
-               <div className="rails-grid">
-                  <div className="rail-item">
-                     <span className="r-num">01</span>
-                     <div className="r-content">
-                        <strong>Data Ingestion</strong>
-                        <p>Automated parsing of physical and digital records into a structured intelligence storage.</p>
+         <section className="s-dark-section">
+            <div className="s-container">
+               <h2 className="s-headline s-white">A multidisciplinary foundation for official command</h2>
+               <div className="s-rails-grid">
+                  <div className="s-rail-item">
+                     <span className="s-rail-num">01</span>
+                     <div>
+                        <strong className="s-rail-title">Data Ingestion</strong>
+                        <p className="s-muted-text">Automated parsing of physical and digital records into a structured intelligence storage.</p>
                      </div>
                   </div>
-                  <div className="rail-item">
-                     <span className="r-num">02</span>
-                     <div className="r-content">
-                        <strong>Search Intelligence</strong>
-                        <p>Fuzzy and semantic search layers designed for the complexity of official memory.</p>
+                  <div className="s-rail-item">
+                     <span className="s-rail-num">02</span>
+                     <div>
+                        <strong className="s-rail-title">Search Intelligence</strong>
+                        <p className="s-muted-text">Fuzzy and semantic search layers designed for the complexity of official memory.</p>
                      </div>
                   </div>
-                  <div className="rail-item">
-                     <span className="r-num">03</span>
-                     <div className="r-content">
-                        <strong>Command Mapping</strong>
-                        <p>Linking field intent and deployment signals to high-level operational outcomes.</p>
+                  <div className="s-rail-item">
+                     <span className="s-rail-num">03</span>
+                     <div>
+                        <strong className="s-rail-title">Command Mapping</strong>
+                        <p className="s-muted-text">Linking field intent and deployment signals to high-level operational outcomes.</p>
                      </div>
                   </div>
-                  <div className="rail-item">
-                     <span className="r-num">04</span>
-                     <div className="r-content">
-                        <strong>Audit Trails</strong>
-                        <p>Continuous verification that intelligence follows role-based access and procedural rules.</p>
+                  <div className="s-rail-item">
+                     <span className="s-rail-num">04</span>
+                     <div>
+                        <strong className="s-rail-title">Audit Trails</strong>
+                        <p className="s-muted-text">Continuous verification that intelligence follows role-based access and procedural rules.</p>
                      </div>
                   </div>
                </div>
@@ -98,133 +92,315 @@ const SentinelUI = () => {
          </section>
 
          {/* 5. WHERE IT CHANGES OPERATIONS */}
-         <section className="impact-section bg-white text-black border-b text-left">
-            <div className="container">
-               <h2 className="section-title small">Where Sentinel changes operations</h2>
-               <div className="impact-grid">
-                  <div className="impact-card">
-                     <h4>Event Command & Public Safety</h4>
-                     <p>Unifying thousands of field feeds into a single operational reality for major deployments.</p>
+         <section className="s-section s-border-b">
+            <div className="s-container">
+               <h2 className="s-sub-headline">Where Sentinel changes operations</h2>
+               <div className="s-grid-2">
+                  <div className="s-card">
+                     <h4 className="s-card-title">Event Command &amp; Public Safety</h4>
+                     <p className="s-card-text">Unifying thousands of field feeds into a single operational reality for major deployments.</p>
                   </div>
-                  <div className="impact-card">
-                     <h4>District Operations Synchronization</h4>
-                     <p>Identifying bottlenecks and performance patterns across district-level administrative units.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">District Operations Synchronization</h4>
+                     <p className="s-card-text">Identifying bottlenecks and performance patterns across district-level administrative units.</p>
                   </div>
                </div>
             </div>
          </section>
 
          {/* 6. DIFFERENTIATION */}
-         <section className="diff-section border-b text-left">
-            <div className="container">
-               <h2 className="section-title small">Why Sentinel is different</h2>
-               <div className="diff-grid">
-                  <div className="diff-card">
-                     <h4>Built for fragmented systems</h4>
-                     <p>Specifically designed for records and workflows that were never meant to speak to each other.</p>
+         <section className="s-section s-border-b">
+            <div className="s-container">
+               <h2 className="s-sub-headline">Why Sentinel is different</h2>
+               <div className="s-grid-3">
+                  <div className="s-card">
+                     <h4 className="s-card-title">Built for fragmented systems</h4>
+                     <p className="s-card-text">Specifically designed for records and workflows that were never meant to speak to each other.</p>
                   </div>
-                  <div className="diff-card">
-                     <h4>Command-aware, not report-first</h4>
-                     <p>Built for action, supervision, and operational context—not passive administrative reporting.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">Command-aware, not report-first</h4>
+                     <p className="s-card-text">Built for action, supervision, and operational context—not passive administrative reporting.</p>
                   </div>
-                  <div className="diff-card">
-                     <h4>Searchable, connected, auditable</h4>
-                     <p>Intelligence is only useful when it can be traced, reviewed, and acted on responsibly.</p>
+                  <div className="s-card">
+                     <h4 className="s-card-title">Searchable, connected, auditable</h4>
+                     <p className="s-card-text">Intelligence is only useful when it can be traced, reviewed, and acted on responsibly.</p>
                   </div>
                </div>
             </div>
          </section>
 
          {/* 7. FINAL CTA WITH FORM */}
-         <section className="cta-section bg-black text-white text-left">
-            <div className="container grid-2 align-bottom">
-               <div>
-                  <h2 className="cta-title">Request a Sentinel briefing</h2>
-                  <p className="cta-desc">Discuss how Sentinel can fit into your official architecture and command environment.</p>
-               </div>
-               <div className="form-container">
-                  <form action="https://formsubmit.co/founder@vinkura.in" method="POST" className="contact-form">
-                     <input type="text" name="name" placeholder="Name" required />
-                     <input type="email" name="email" placeholder="Work Email" required />
-                     <input type="text" name="organization" placeholder="Organization / Department" required />
-                     <textarea name="usecase" placeholder="Brief use case" required></textarea>
-                     <input type="submit" value="Submit Request" className="submit-input" />
-                  </form>
+         <section className="s-briefing-section">
+            <div className="s-container">
+               <div className="s-briefing-grid">
+                  <div>
+                     <h2 className="s-briefing-title">Request a Sentinel briefing</h2>
+                     <p className="s-briefing-desc">Discuss how Sentinel can fit into your official architecture and command environment.</p>
+                  </div>
+                  <div className="s-form-wrap">
+                     <form action="https://formsubmit.co/founder@vinkura.in" method="POST" className="s-form">
+                        <input type="text" name="name" placeholder="Name" required />
+                        <input type="email" name="email" placeholder="Work Email" required />
+                        <input type="text" name="organization" placeholder="Organization / Department" required />
+                        <textarea name="usecase" placeholder="Brief use case" required></textarea>
+                        <input type="submit" value="Submit Request" className="s-submit" />
+                     </form>
+                  </div>
                </div>
             </div>
          </section>
 
          <style jsx>{`
-        .sentinel-page { font-family: sans-serif; overflow-x: hidden; width: 100%; line-height: 1.5; color: #000; background: #fff; }
-        .text-left { text-align: left; }
-        .container { max-width: 1320px; margin: 0 auto; padding: 0 2rem; width: 100%; }
-        
-        .hero-section { padding: 140px 0 80px; border-bottom: 1px solid #000; }
-        .hero-header { margin-bottom: 4rem; text-align: left; }
-        .eyebrow { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #000; margin-bottom: 1.5rem; display: block; }
-        .product-title { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: normal; color: #000; }
-        .hero-summary { font-size: 1.15rem; color: #000; max-width: 800px; font-weight: normal; line-height: 1.5; margin: 0; }
-        
-        .image-placeholder { margin: 0; display: flex; flex-direction: column; align-items: stretch; justify-content: center; width: 100%;  padding: 1rem; background: #fff;  border-radius: 16px; overflow: hidden; border: none;}
-        .img-box { width: 100%; height: 250px; background: #f0f0f0; display: block; object-fit: cover; border-radius: 12px; border: none; }
-        .image-placeholder figcaption { margin-top: 1rem; font-size: 0.75rem; color: #000; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-weight: bold; }
+            /* PAGE WRAPPER — no height, no overflow-y that causes scroll */
+            .s-page {
+               font-family: sans-serif;
+               width: 100%;
+               overflow-x: hidden;
+               color: #000;
+               background: #fff;
+            }
 
-        .thesis-section { padding: 80px 0; }
-        .border-b { border-bottom: 1px solid #000; padding-bottom: 4rem; }
-        .section-title { font-size: 3.5rem; margin-bottom: 2rem; line-height: 1.1; font-weight: normal; color: #000; }
-        .section-title.small { font-size: 2.5rem; }
-        .thesis-text { font-size: 1.15rem; color: #000; max-width: 800px; line-height: 1.6; }
+            /* CONTAINER */
+            .s-container {
+               max-width: 1320px;
+               margin: 0 auto;
+               padding: 0 2rem;
+               width: 100%;
+            }
 
-        .capabilities-section { padding: 80px 0; }
-        .body-subtext { font-size: 1.1rem; color: #000; margin-bottom: 4rem; max-width: 700px; }
-        .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-        .cap-card { padding: 2rem; border: 1px solid transparent; background: #fff; }
-        .cap-card h4 { font-size: 1.35rem; margin-bottom: 1rem; font-weight: bold; }
-        .cap-card p { font-size: 1rem; color: #000; line-height: 1.6; }
+            /* HERO — black bg, no height constraint */
+            .s-hero {
+               padding: 140px 0 80px;
+               background: #000;
+               color: #fff;
+               border-bottom: 1px solid #333;
+            }
+            .s-eyebrow {
+               display: block;
+               font-size: 0.75rem;
+               font-weight: bold;
+               text-transform: uppercase;
+               letter-spacing: 2px;
+               color: #888;
+               margin-bottom: 1.5rem;
+            }
+            .s-hero-title {
+               font-size: 4rem;
+               line-height: 1.1;
+               margin-bottom: 1.5rem;
+               font-weight: normal;
+               color: #fff;
+            }
+            .s-hero-sub {
+               font-size: 1.15rem;
+               color: #ccc;
+               max-width: 800px;
+               font-weight: normal;
+               line-height: 1.5;
+               margin: 0;
+            }
 
-        .rails-section { padding: 100px 0; background: #000; color: #fff; }
-        .border-b-white { border-bottom: 1px solid #fff; padding-bottom: 4rem; }
-        .section-title.white { color: #fff; margin-bottom: 4rem; }
-        .rails-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; }
-        .rail-item { display: flex; gap: 1.5rem; align-items: flex-start; }
-        .r-num { font-size: 1.5rem; font-weight: bold; color: #fff; }
-        .r-content strong { display: block; font-size: 1.25rem; margin-bottom: 1rem; font-weight: bold; }
-        .r-content p { font-size: 1rem; color: #ccc; line-height: 1.6; }
+            /* GENERIC WHITE SECTIONS */
+            .s-section {
+               padding: 80px 0;
+               background: #fff;
+            }
+            .s-border-b {
+               border-bottom: 1px solid #e8e8e8;
+            }
 
-        .impact-section { padding: 80px 0; }
-        .impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-        .impact-card { padding: 2rem; border: 1px solid transparent; background: #fff; }
-        .impact-card h4 { font-size: 1.35rem; margin-bottom: 1rem; font-weight: bold; }
-        .impact-card p { font-size: 1rem; color: #000; line-height: 1.6; }
+            /* TYPOGRAPHY */
+            .s-headline {
+               font-size: 3rem;
+               margin-bottom: 2rem;
+               line-height: 1.1;
+               font-weight: normal;
+               color: #000;
+            }
+            .s-headline.s-white { color: #fff; }
+            .s-sub-headline {
+               font-size: 2.25rem;
+               margin-bottom: 2rem;
+               line-height: 1.1;
+               font-weight: normal;
+               color: #000;
+            }
+            .s-body-text {
+               font-size: 1.1rem;
+               color: #333;
+               max-width: 800px;
+               line-height: 1.7;
+               margin: 0;
+            }
 
-        .diff-section { padding: 80px 0; }
-        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .diff-card { padding: 2rem; border: 1px solid transparent; background: #fff; }
-        .diff-card h4 { font-size: 1.25rem; margin-bottom: 1rem; font-weight: bold; }
-        .diff-card p { font-size: 1rem; color: #000; line-height: 1.6; }
+            /* GRID LAYOUTS */
+            .s-grid-2 {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 2.5rem;
+            }
+            .s-grid-3 {
+               display: grid;
+               grid-template-columns: 1fr 1fr 1fr;
+               gap: 2rem;
+            }
 
-        /* CTA WITH FORM */
-        .cta-section { padding: 100px 0; background: #000; color: #fff; border-top: 1px solid #fff; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        .align-bottom { align-items: end; }
-        .cta-title { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: normal; color: #000000ff; }
-        .cta-desc { font-size: 1.1rem; color: #000000ff; max-width: 500px; line-height: 1.5; }
+            /* CARDS */
+            .s-card {
+               padding: 2rem 0;
+               border-top: 1px solid #e8e8e8;
+            }
+            .s-card-title {
+               font-size: 1.2rem;
+               margin-bottom: 0.75rem;
+               font-weight: bold;
+               color: #000;
+            }
+            .s-card-text {
+               font-size: 1rem;
+               color: #555;
+               line-height: 1.6;
+               margin: 0;
+            }
 
-        .form-container { width: 100%; max-width: 450px; margin-left: auto; background: #fff; padding: 2rem; color: #000; border: 1px solid transparent; }
-        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { width: 100%; padding: 0.75rem; border: 1px solid transparent; font-family: sans-serif; font-size: 0.9rem; outline: none; background: #fff; color: #000; }
-        .contact-form textarea { min-height: 100px; resize: none; }
-        .submit-input { padding: 0.75rem 1.5rem; background: #000; color: #fff; border: 1px solid transparent; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; }
-        .submit-input:hover { background: #333; }
+            /* DARK SECTION — foundation rails */
+            .s-dark-section {
+               padding: 100px 0;
+               background: #000;
+               color: #fff;
+            }
+            .s-rails-grid {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 4rem;
+               margin-top: 3rem;
+            }
+            .s-rail-item {
+               display: flex;
+               gap: 1.5rem;
+               align-items: flex-start;
+            }
+            .s-rail-num {
+               font-size: 1.5rem;
+               font-weight: bold;
+               color: #fff;
+               flex-shrink: 0;
+            }
+            .s-rail-title {
+               display: block;
+               font-size: 1.15rem;
+               margin-bottom: 0.75rem;
+               font-weight: bold;
+               color: #fff;
+            }
+            .s-muted-text {
+               font-size: 1rem;
+               color: #aaa;
+               line-height: 1.6;
+               margin: 0;
+            }
+            .s-white { color: #fff; }
 
-        @media (max-width: 1024px) {
-          .grid-2, .cap-grid, .rails-grid, .impact-grid, .diff-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .form-container { margin-left: 0; }
-        }
-        @media (max-width: 768px) {
-          .product-title, .section-title { font-size: 2.5rem; }
-        }
-      `}</style>
+            /* CTA / BRIEFING SECTION — unique class name, no collision with globals */
+            .s-briefing-section {
+               padding: 100px 0;
+               background: #000;
+               color: #fff;
+               border-top: 1px solid #000;
+            }
+            .s-briefing-grid {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 4rem;
+               align-items: end;
+            }
+            .s-briefing-title {
+               font-size: 2.5rem;
+               margin-bottom: 1.5rem;
+               font-weight: normal;
+               color: #fff;
+               line-height: 1.1;
+            }
+            .s-briefing-desc {
+               font-size: 1.1rem;
+               color: #fff;
+               max-width: 500px;
+               line-height: 1.5;
+               margin: 0;
+            }
+            .s-form-wrap {
+               width: 100%;
+               max-width: 450px;
+               margin-left: auto;
+               background: #fafafa;
+               padding: 3rem;
+               color: #000;
+               border-radius: 20px;
+               border: 1px solid #eee;
+            }
+            .s-form {
+               display: flex;
+               flex-direction: column;
+               gap: 1.25rem;
+            }
+            .s-form input[type="text"],
+            .s-form input[type="email"],
+            .s-form textarea {
+               width: 100%;
+               padding: 1rem;
+               border: 1px solid #ddd;
+               font-family: sans-serif;
+               font-size: 0.95rem;
+               outline: none;
+               background: #fff;
+               color: #000;
+               border-radius: 8px;
+            }
+            .s-form input:focus, .s-form textarea:focus {
+               border-color: #bbb;
+            }
+            .s-form textarea {
+               min-height: 120px;
+               resize: none;
+            }
+            .s-submit {
+               padding: 1.25rem 2rem;
+               background: #000;
+               color: #fff;
+               border: 1px solid transparent;
+               font-weight: bold;
+               text-transform: uppercase;
+               font-size: 0.8rem;
+               letter-spacing: 2px;
+               cursor: pointer;
+               border-radius: 8px;
+            }
+            .s-submit:hover { 
+               background: #333;
+               color: #fff;
+            }
+
+            /* RESPONSIVE */
+            @media (max-width: 1024px) {
+               .s-briefing-grid { grid-template-columns: 1fr; gap: 3rem; }
+               .s-form-wrap { margin-left: 0; max-width: none; }
+               .s-grid-2 { grid-template-columns: 1fr; }
+               .s-grid-3 { grid-template-columns: 1fr; }
+               .s-rails-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            }
+            @media (max-width: 768px) {
+               .s-hero { padding: 100px 0 56px; }
+               .s-hero-title { font-size: 2.5rem; }
+               .s-headline { font-size: 2rem; }
+               .s-sub-headline { font-size: 1.75rem; }
+               .s-section { padding: 56px 0; }
+               .s-dark-section { padding: 64px 0; }
+               .s-briefing-section { padding: 64px 0; }
+               .s-briefing-title { font-size: 2rem; }
+               .s-container { padding: 0 1.25rem; }
+               .s-form-wrap { padding: 1.25rem; border-radius: 14px; }
+            }
+         `}</style>
       </main>
    );
 };

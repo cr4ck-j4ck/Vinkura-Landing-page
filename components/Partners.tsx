@@ -39,13 +39,19 @@ const Partners = () => {
   return (
     <section className="partners-section">
       <div className="container">
-        <h3 className="section-subtitle">VOICE OF OUR PARTNERS</h3>
+        <div className="section-header mobile-carousel-header">
+          <h3 className="section-subtitle">VOICE OF OUR PARTNERS</h3>
+          <div className="carousel-controls" aria-label="Partner carousel controls">
+            <button className="nav-btn prev" onClick={prev} aria-label="Previous partner">
+              <span className="nav-char">←</span>
+            </button>
+            <button className="nav-btn next" onClick={next} aria-label="Next partner">
+              <span className="nav-char">→</span>
+            </button>
+          </div>
+        </div>
         
         <div className="carousel-wrapper">
-          <button className="nav-btn prev" onClick={prev} aria-label="Previous partner">
-            <span className="nav-char">←</span>
-          </button>
-          
           <div className="active-card-container">
             {partners.map((partner, i) => (
               <div 
@@ -66,9 +72,6 @@ const Partners = () => {
             ))}
           </div>
 
-          <button className="nav-btn next" onClick={next} aria-label="Next partner">
-            <span className="nav-char">→</span>
-          </button>
         </div>
 
         <div className="carousel-indicators">
@@ -101,6 +104,24 @@ const Partners = () => {
           color: #999;
           margin-bottom: 5rem;
           text-align: center;
+        }
+
+        .section-header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 2rem;
+        }
+
+        .mobile-carousel-header .section-subtitle {
+          margin-bottom: 0;
+          text-align: left;
+        }
+
+        .carousel-controls {
+          display: none;
+          gap: 0.75rem;
+          flex-shrink: 0;
         }
 
         .carousel-wrapper {
@@ -255,9 +276,31 @@ const Partners = () => {
         }
 
         @media (max-width: 768px) {
+          .section-header {
+            margin-bottom: 1.5rem;
+          }
+          .carousel-controls {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 0.1rem;
+          }
+          .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.92);
+            color: #000;
+            opacity: 1;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(10px);
+          }
+          .nav-char { font-size: 1rem; }
           .carousel-wrapper { gap: 1rem; }
           .partner-quote { font-size: 1.4rem; }
-          .nav-btn { display: none; }
           .partner-card { padding: 4rem 2rem; border-radius: 16px; }
           .quote-icon { font-size: 4rem; top: 0.5rem; left: 1rem; }
         }

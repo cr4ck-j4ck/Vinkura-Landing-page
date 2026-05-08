@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const DDMSUI = () => {
   const [activeTab, setActiveTab] = useState('Police');
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const industries = [
     {
@@ -86,6 +89,53 @@ const DDMSUI = () => {
     }
   ];
 
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Carousel navigation
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % capabilities.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + capabilities.length) % capabilities.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  // Touch/swipe handling for mobile
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      nextSlide();
+    }
+
+    if (touchStart - touchEnd < -75) {
+      prevSlide();
+    }
+  };
+
   return (
     <main className="ddms-redesign">
       {/* 1. HERO SECTION (JARVIS INSPIRED) */}
@@ -111,7 +161,7 @@ const DDMSUI = () => {
                   Watch Demo Video <span className="arrow">→</span>
                 </Link>
                 <Link href="#contact" className="btn-jarvis outline">
-                  Book a Personalized Demo <span className="arrow">→</span>
+                  Book a Demo <span className="arrow">→</span>
                 </Link>
               </div>
 
@@ -197,19 +247,60 @@ const DDMSUI = () => {
         </div>
       </section>
 
-      {/* 5. CORE CAPABILITIES */}
+      {/* 5. CORE CAPABILITIES - CAROUSEL ON MOBILE */}
       <section className="capabilities section-padding">
         <div className="container">
           <h2 className="section-title text-center mb-5">Core Capabilities</h2>
-          <div className="grid-3">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="cap-card">
-                <div className="cap-icon">{cap.icon}</div>
-                <h3>{cap.title}</h3>
-                <p>{cap.desc}</p>
+          
+          {isMobile ? (
+            <div className="carousel-container">
+              <div 
+                className="carousel-wrapper"
+                ref={carouselRef}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div 
+                  className="carousel-track"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {capabilities.map((cap, i) => (
+                    <div key={i} className="carousel-slide">
+                      <div className="cap-card">
+                        <div className="cap-icon">{cap.icon}</div>
+                        <h3>{cap.title}</h3>
+                        <p>{cap.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
+              
+              <div className="carousel-controls">
+                <button onClick={prevSlide} className="carousel-btn" aria-label="Previous">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button onClick={nextSlide} className="carousel-btn" aria-label="Next">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="grid-3">
+              {capabilities.map((cap, i) => (
+                <div key={i} className="cap-card">
+                  <div className="cap-icon">{cap.icon}</div>
+                  <h3>{cap.title}</h3>
+                  <p>{cap.desc}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -300,10 +391,15 @@ const DDMSUI = () => {
           <h2 className="section-title mb-5">Frequently Asked Questions</h2>
           <div className="faq-grid">
             {faqs.map((faq, i) => (
-              <div key={i} className="faq-item">
-                <h4>{faq.q}</h4>
-                <p>{faq.a}</p>
-              </div>
+              <details key={i} className="faq-item">
+                <summary>
+                  <span>{faq.q}</span>
+                  <span className="faq-icon" aria-hidden="true">+</span>
+                </summary>
+                <div className="faq-answer">
+                  <p>{faq.a}</p>
+                </div>
+              </details>
             ))}
           </div>
         </div>
@@ -321,426 +417,978 @@ const DDMSUI = () => {
       </section>
 
       <style jsx>{`
+        /* MOBILE FIRST BASE STYLES */
         .ddms-redesign {
           background: #fff;
           color: #111;
-          font-family: var(--font-body);
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          overflow-x: hidden;
         }
+        
         .container {
+          width: 100%;
           max-width: 1400px;
           margin: 0 auto;
-          padding: 0 4rem;
+          padding: 0 1.25rem;
+          box-sizing: border-box;
         }
+        
         .section-padding {
-          padding: 10rem 0;
+          padding: 4rem 0;
         }
-        .grid-2 {
+        
+        .grid-2, .grid-3 {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 6rem;
-          align-items: center;
+          grid-template-columns: 1fr;
+          gap: 2rem;
         }
-        .grid-3 {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 3rem;
-        }
+        
         .bg-light {
           background: #fafafa;
         }
+        
         .bg-black {
           background: #000;
         }
+        
         .text-white {
           color: #fff;
         }
+        
+        .text-center {
+          text-align: center;
+        }
+        
         .border-t {
           border-top: 1px solid #eee;
         }
+        
+        .mt-4 {
+          margin-top: 1.5rem;
+        }
+        
+        .mt-5 {
+          margin-top: 2.5rem;
+        }
+        
+        .mb-5 {
+          margin-bottom: 2.5rem;
+        }
 
-        /* JARVIS HERO */
+        /* HERO SECTION - MOBILE FIRST */
         .hero-jarvis {
           position: relative;
-          height: 90vh;
-          min-height: 700px;
+          min-height: 100vh;
           display: flex;
           align-items: center;
           overflow: hidden;
           background: #000;
           color: #fff;
+          padding: 2rem 0;
         }
+        
         .hero-background-visual {
           position: absolute;
           top: 0;
           right: 0;
-          width: 65%;
+          width: 100%;
           height: 100%;
           z-index: 1;
         }
+        
         .bg-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
         }
+        
         .hero-overlay {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(to right, #000 30%, transparent 80%);
+          background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
           z-index: 2;
         }
+        
         .hero-grid-jarvis {
           position: relative;
           z-index: 3;
-          display: grid;
-          grid-template-columns: 1.2fr 1fr;
         }
+        
         .hero-content-jarvis {
-          max-width: 750px;
+          width: 100%;
         }
+        
         .hero-title-jarvis {
-          font-family: var(--font-hero);
-          font-size: 4.2rem;
+          font-size: 2rem;
           line-height: 1.1;
-          font-weight: 500;
-          letter-spacing: -2px;
-          margin-bottom: 2rem;
+          font-weight: 600;
+          letter-spacing: -1px;
+          margin-bottom: 1.5rem;
         }
+        
         .hero-subtitle-jarvis {
-          font-size: 1.25rem;
+          font-size: 1rem;
           line-height: 1.5;
           opacity: 0.9;
           margin-bottom: 1rem;
-          max-width: 600px;
         }
+        
         .hero-support-jarvis {
-          font-size: 1rem;
+          font-size: 0.85rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 1px;
-          margin-bottom: 3.5rem;
+          margin-bottom: 2rem;
           color: #fff;
         }
+        
         .hero-ctas-jarvis {
           display: flex;
-          gap: 1rem;
-          margin-bottom: 4rem;
+          flex-direction: column;
+          gap: 0.75rem;
+          margin-bottom: 2.5rem;
         }
+        
         .btn-jarvis {
           display: inline-flex;
           align-items: center;
-          gap: 0.75rem;
-          padding: 0.85rem 1.8rem;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.9rem 1.5rem;
           border-radius: 6px;
           font-weight: 600;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           transition: all 0.3s;
-          text-transform: none;
+          text-decoration: none;
+          text-align: center;
         }
+        
         .btn-jarvis.outline {
           border: 1px solid rgba(255, 255, 255, 0.3);
           background: rgba(255, 255, 255, 0.1);
           color: #fff;
         }
+        
         .btn-jarvis.outline:hover {
           background: rgba(255, 255, 255, 0.2);
           border-color: #fff;
         }
+        
         .arrow {
-          font-size: 1.1rem;
+          font-size: 1rem;
           transition: transform 0.3s;
         }
+        
         .btn-jarvis:hover .arrow {
           transform: translateX(4px);
         }
 
         .hero-partners {
-          display: flex;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
           align-items: center;
-          gap: 1.5rem;
+          gap: 0.75rem;
           opacity: 0.7;
         }
+        
         .partner-name {
-          font-size: 0.75rem;
+          font-size: 0.65rem;
           font-weight: 800;
-          letter-spacing: 2px;
+          letter-spacing: 1.5px;
           text-transform: uppercase;
+          text-align: center;
         }
+        
         .partner-divider {
-          height: 20px;
+          height: 16px;
           width: 1px;
           background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Trust Bar */
+        /* TRUST BAR */
         .trust-bar {
-          padding: 3rem 0;
+          padding: 1.5rem 0;
           border-top: 1px solid #eee;
           border-bottom: 1px solid #eee;
         }
+        
         .trust-content {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
         }
+        
         .trust-label {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           font-weight: 700;
           color: #999;
           text-transform: uppercase;
           letter-spacing: 1px;
         }
+        
         .trust-points {
           display: flex;
-          gap: 1.5rem;
+          justify-content: center;
+          gap: 1rem;
           font-weight: 600;
+          font-size: 0.85rem;
           color: #333;
         }
+        
         .dot {
           color: #ddd;
         }
 
-        /* Sections */
+        /* SECTION TITLES */
         .section-title {
-          font-family: var(--font-hero);
-          font-size: 3.5rem;
-          letter-spacing: -2px;
-          margin-bottom: 2.5rem;
+          font-size: 2rem;
+          letter-spacing: -1px;
+          margin-bottom: 1.5rem;
           line-height: 1.1;
+          font-weight: 600;
         }
+        
         .what-text p {
-          font-size: 1.25rem;
+          font-size: 1rem;
           line-height: 1.6;
           color: #444;
+          margin-bottom: 1rem;
+        }
+        
+        .what-visual {
+          width: 100%;
+        }
+        
+        .visual-card {
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        
+        .visual-card img {
+          width: 100%;
+          height: auto;
+          display: block;
         }
 
-        /* Cards */
+        /* CARDS */
         .why-card {
           background: #fff;
-          padding: 3rem;
-          border-radius: 24px;
+          padding: 2rem;
+          border-radius: 16px;
           border: 1px solid #eee;
           transition: all 0.3s;
         }
+        
         .why-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+          transform: translateY(-3px);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+        
         .card-tag {
-          font-size: 0.7rem;
+          font-size: 0.65rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 1px;
           color: #999;
           display: block;
-          margin-bottom: 1.5rem;
-        }
-        .why-card h3 {
-          font-size: 1.5rem;
           margin-bottom: 1rem;
         }
+        
+        .why-card h3 {
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+          font-weight: 600;
+        }
+        
         .why-card p {
           color: #666;
           line-height: 1.5;
+          font-size: 0.95rem;
         }
 
-        .cap-card {
-          padding: 3rem;
-          background: #fafafa;
-          border-radius: 24px;
-          transition: all 0.3s;
+        /* CAPABILITIES - MOBILE CAROUSEL */
+        .carousel-container {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
         }
+        
+        .carousel-wrapper {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+        }
+        
+        .carousel-track {
+          display: flex;
+          transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: transform;
+        }
+        
+        .carousel-slide {
+          min-width: 100%;
+          flex-shrink: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        .cap-card {
+          padding: 2rem;
+          background: #fafafa;
+          border-radius: 16px;
+          transition: all 0.3s;
+          height: 100%;
+        }
+        
         .cap-card:hover {
           background: #f0f0f0;
         }
+        
         .cap-icon {
           color: #000;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
+        
         .cap-card h3 {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           margin-bottom: 0.75rem;
+          font-weight: 600;
         }
+        
         .cap-card p {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           color: #666;
           line-height: 1.5;
         }
+        
+        .carousel-controls {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        
+        .carousel-btn {
+          background: #000;
+          color: #fff;
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        
+        .carousel-btn:hover {
+          background: #333;
+          transform: scale(1.05);
+        }
+        
+        @media (max-width: 767px) {
+          .carousel-container {
+            padding-top: 3.5rem;
+          }
 
-        /* Impact */
+          .carousel-controls {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: 0;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            width: auto;
+            z-index: 2;
+          }
+
+          .carousel-btn {
+            width: 36px;
+            height: 36px;
+          }
+        }
+
+        /* IMPACT */
         .impact-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 4rem;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
         }
+        
         .impact-val {
-          font-family: var(--font-hero);
-          font-size: 5rem;
-          font-weight: 500;
+          font-size: 2.5rem;
+          font-weight: 600;
           display: block;
-          letter-spacing: -4px;
-          margin-bottom: 1rem;
+          letter-spacing: -2px;
+          margin-bottom: 0.5rem;
         }
+        
         .impact-item p {
-          font-size: 1.1rem;
+          font-size: 0.9rem;
           font-weight: 300;
           color: #aaa;
         }
 
-        /* Tabs */
+        /* TABS */
         .tabs {
           display: flex;
-          gap: 1.5rem;
-          margin-bottom: 3rem;
+          gap: 0.5rem;
+          margin-bottom: 2rem;
           border-bottom: 1px solid #eee;
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           overflow-x: auto;
           scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
         }
-        .tabs::-webkit-scrollbar { display: none; }
+        
+        .tabs::-webkit-scrollbar { 
+          display: none; 
+        }
+        
         .tab-btn {
           white-space: nowrap;
-          padding: 0.75rem 0;
+          padding: 0.75rem 1rem;
           background: transparent;
           border: none;
-          font-size: 1rem;
+          font-size: 0.85rem;
           font-weight: 600;
           color: #999;
           cursor: pointer;
           transition: all 0.3s;
           border-bottom: 2px solid transparent;
+          flex-shrink: 0;
         }
+        
         .tab-btn.active {
           color: #000;
           border-bottom-color: #000;
         }
+        
         .tab-content {
-          padding: 4rem;
+          padding: 2rem;
           background: #f7f7f7;
-          border-radius: 24px;
-          font-size: 2rem;
-          font-family: var(--font-hero);
-          letter-spacing: -1px;
-          line-height: 1.2;
+          border-radius: 16px;
+          font-size: 1.15rem;
+          letter-spacing: -0.5px;
+          line-height: 1.4;
         }
 
-        /* Success */
+        /* SUCCESS CARDS */
         .success-card {
-          padding: 4rem;
+          padding: 2rem;
           background: #fff;
-          border-radius: 24px;
+          border-radius: 16px;
           border: 1px solid #eee;
         }
+        
         .success-tag {
-          font-size: 0.7rem;
+          font-size: 0.65rem;
           font-weight: 800;
           text-transform: uppercase;
           color: #999;
-          letter-spacing: 2px;
+          letter-spacing: 1.5px;
           display: block;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
         }
+        
         .success-card h3 {
-          font-size: 2rem;
-          margin-bottom: 1.5rem;
-          letter-spacing: -1px;
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          letter-spacing: -0.5px;
+          font-weight: 600;
         }
+        
         .success-card p {
-          font-size: 1.1rem;
+          font-size: 0.95rem;
           color: #555;
           line-height: 1.6;
         }
 
-        /* Emotional */
+        /* EMOTIONAL SECTION */
         .emotional-box {
-          max-width: 900px;
-          margin: 0 auto;
+          max-width: 100%;
         }
+        
         .big-title {
-          font-family: var(--font-hero);
-          font-size: 6rem;
-          line-height: 1;
-          letter-spacing: -4px;
-          margin-bottom: 4rem;
+          font-size: 2rem;
+          line-height: 1.1;
+          letter-spacing: -1px;
+          margin-bottom: 2rem;
+          font-weight: 600;
         }
+        
         .emotional-points {
-          margin-bottom: 4rem;
+          margin-bottom: 2rem;
         }
+        
         .emotional-points p {
-          font-size: 2.5rem;
+          font-size: 1.25rem;
           font-weight: 300;
           color: #888;
           margin-bottom: 0.5rem;
         }
+        
         .final-punch {
-          font-size: 3rem;
+          font-size: 1.5rem;
           font-weight: 600;
-          letter-spacing: -1.5px;
+          letter-spacing: -0.5px;
         }
 
         /* FAQ */
         .faq-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem 6rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
-        .faq-item h4 {
-          font-size: 1.3rem;
+        
+        .faq-item {
+          border: 1px solid #e6e6e6;
+          border-radius: 1rem;
+          background: #fff;
+          overflow: hidden;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        
+        .faq-item[open] {
+          border-color: #cfcfcf;
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .faq-item summary {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          cursor: pointer;
+          padding: 1.15rem 1.25rem;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #111;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .faq-icon {
+          flex: 0 0 auto;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 999px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #f3f3f3;
+          color: #333;
+          font-size: 1.1rem;
+          font-weight: 500;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .faq-item[open] .faq-icon {
+          transform: rotate(45deg);
+          background: #111;
+          color: #fff;
+        }
+
+        .faq-answer {
+          padding: 0 1.25rem 1.15rem;
+        }
+
+        .faq-answer p {
+          color: #666;
+          line-height: 1.6;
+          font-size: 0.95rem;
+          margin: 0;
+        }
+
+        /* FINAL CTA */
+        .final-title {
+          font-size: 2rem;
+          letter-spacing: -1px;
           margin-bottom: 1rem;
           font-weight: 600;
         }
-        .faq-item p {
-          color: #666;
-          line-height: 1.6;
-        }
-
-        /* Final CTA */
-        .final-title {
-          font-family: var(--font-hero);
-          font-size: 5rem;
-          letter-spacing: -3px;
-          margin-bottom: 1.5rem;
-        }
+        
         .final-subtitle {
-          font-size: 1.8rem;
+          font-size: 1.15rem;
           font-weight: 300;
           opacity: 0.6;
         }
+        
         .btn-primary-large {
           display: inline-block;
           background: #fff;
           color: #000;
-          padding: 1.5rem 4rem;
+          padding: 1.25rem 3rem;
           border-radius: 999px;
           font-weight: 700;
           text-transform: uppercase;
-          font-size: 1rem;
-          letter-spacing: 2px;
+          font-size: 0.85rem;
+          letter-spacing: 1.5px;
           transition: all 0.3s;
+          text-decoration: none;
         }
+        
         .btn-primary-large:hover {
           transform: scale(1.05);
           background: #eee;
         }
 
-        @media (max-width: 1200px) {
-          .container { padding: 0 3rem; }
-          .hero-title { font-size: 4rem; }
-          .big-title { font-size: 5rem; }
+        /* TABLET - 768px and up */
+        @media (min-width: 768px) {
+          .container {
+            padding: 0 2rem;
+          }
+          
+          .section-padding {
+            padding: 6rem 0;
+          }
+          
+          .grid-2 {
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+          }
+          
+          .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+          }
+          
+          .hero-title-jarvis {
+            font-size: 3.5rem;
+            letter-spacing: -2px;
+          }
+          
+          .hero-subtitle-jarvis {
+            font-size: 1.15rem;
+          }
+          
+          .hero-support-jarvis {
+            font-size: 0.9rem;
+          }
+          
+          .hero-ctas-jarvis {
+            flex-direction: row;
+            gap: 1rem;
+          }
+          
+          .btn-jarvis {
+            padding: 0.85rem 1.8rem;
+            font-size: 0.9rem;
+          }
+          
+          .partner-name {
+            font-size: 0.7rem;
+          }
+          
+          .trust-content {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+          
+          .trust-label {
+            font-size: 0.8rem;
+          }
+          
+          .trust-points {
+            font-size: 1rem;
+            gap: 1.5rem;
+          }
+          
+          .section-title {
+            font-size: 3rem;
+            letter-spacing: -2px;
+          }
+          
+          .what-text p {
+            font-size: 1.15rem;
+          }
+          
+          .why-card {
+            padding: 2.5rem;
+          }
+          
+          .why-card h3 {
+            font-size: 1.35rem;
+          }
+          
+          .impact-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+          }
+          
+          .impact-val {
+            font-size: 4rem;
+            letter-spacing: -3px;
+          }
+          
+          .impact-item p {
+            font-size: 1rem;
+          }
+          
+          .tab-content {
+            padding: 3rem;
+            font-size: 1.75rem;
+          }
+          
+          .success-card {
+            padding: 3rem;
+          }
+          
+          .success-card h3 {
+            font-size: 1.75rem;
+          }
+          
+          .success-card p {
+            font-size: 1.05rem;
+          }
+          
+          .big-title {
+            font-size: 4rem;
+            letter-spacing: -3px;
+          }
+          
+          .emotional-points p {
+            font-size: 2rem;
+          }
+          
+          .final-punch {
+            font-size: 2.5rem;
+          }
+          
+          .faq-grid {
+            gap: 1.25rem;
+          }
+          
+          .faq-item summary {
+            font-size: 1.2rem;
+            padding: 1.35rem 1.5rem;
+          }
+
+          .faq-answer {
+            padding: 0 1.5rem 1.35rem;
+          }
+
+          .faq-answer p {
+            font-size: 1rem;
+          }
+          
+          .final-title {
+            font-size: 3.5rem;
+            letter-spacing: -2px;
+          }
+          
+          .final-subtitle {
+            font-size: 1.5rem;
+          }
         }
 
-        @media (max-width: 968px) {
-          .section-padding { padding: 6rem 0; }
-          .grid-2, .grid-3, .impact-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .hero-grid { grid-template-columns: 1fr; }
-          .hero-title { font-size: 3.5rem; }
-          .tab-content { font-size: 1.5rem; padding: 2.5rem; }
-          .big-title { font-size: 3.5rem; }
-          .final-title { font-size: 3rem; }
-          .impact-val { font-size: 4rem; }
+        /* DESKTOP - 1024px and up */
+        @media (min-width: 1024px) {
+          .container {
+            padding: 0 3rem;
+          }
+          
+          .section-padding {
+            padding: 8rem 0;
+          }
+          
+          .grid-2 {
+            gap: 6rem;
+          }
+          
+          .grid-3 {
+            gap: 3rem;
+          }
+          
+          .hero-jarvis {
+            min-height: 90vh;
+          }
+          
+          .hero-background-visual {
+            width: 65%;
+          }
+          
+          .hero-overlay {
+            background: linear-gradient(to right, #000 30%, transparent 80%);
+          }
+          
+          .hero-grid-jarvis {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+          }
+          
+          .hero-content-jarvis {
+            max-width: 750px;
+          }
+          
+          .hero-title-jarvis {
+            font-size: 4.2rem;
+          }
+          
+          .hero-subtitle-jarvis {
+            font-size: 1.25rem;
+            max-width: 600px;
+          }
+          
+          .hero-support-jarvis {
+            font-size: 1rem;
+            margin-bottom: 3.5rem;
+          }
+          
+          .hero-ctas-jarvis {
+            margin-bottom: 4rem;
+          }
+          
+          .partner-name {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+          }
+          
+          .partner-divider {
+            height: 20px;
+          }
+          
+          .trust-bar {
+            padding: 3rem 0;
+          }
+          
+          .section-title {
+            font-size: 3.5rem;
+          }
+          
+          .what-text p {
+            font-size: 1.25rem;
+          }
+          
+          .why-card {
+            padding: 3rem;
+          }
+          
+          .why-card h3 {
+            font-size: 1.5rem;
+          }
+          
+          .cap-card {
+            padding: 3rem;
+          }
+          
+          .cap-card h3 {
+            font-size: 1.25rem;
+          }
+          
+          .cap-card p {
+            font-size: 0.95rem;
+          }
+          
+          .impact-grid {
+            gap: 4rem;
+          }
+          
+          .impact-val {
+            font-size: 5rem;
+            letter-spacing: -4px;
+          }
+          
+          .impact-item p {
+            font-size: 1.1rem;
+          }
+          
+          .tab-content {
+            padding: 4rem;
+            font-size: 2rem;
+          }
+          
+          .success-card {
+            padding: 4rem;
+          }
+          
+          .success-card h3 {
+            font-size: 2rem;
+          }
+          
+          .success-card p {
+            font-size: 1.1rem;
+          }
+          
+          .emotional-box {
+            max-width: 900px;
+            margin: 0 auto;
+          }
+          
+          .big-title {
+            font-size: 6rem;
+            letter-spacing: -4px;
+            margin-bottom: 4rem;
+          }
+          
+          .emotional-points {
+            margin-bottom: 4rem;
+          }
+          
+          .emotional-points p {
+            font-size: 2.5rem;
+          }
+          
+          .final-punch {
+            font-size: 3rem;
+            letter-spacing: -1.5px;
+          }
+          
+          .faq-grid {
+            gap: 1.25rem;
+          }
+          
+          .faq-item summary {
+            font-size: 1.3rem;
+            padding: 1.5rem 1.75rem;
+          }
+
+          .faq-answer {
+            padding: 0 1.75rem 1.5rem;
+          }
+
+          .faq-answer p {
+            font-size: 1.05rem;
+          }
+          
+          .final-title {
+            font-size: 5rem;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+          }
+          
+          .final-subtitle {
+            font-size: 1.8rem;
+          }
+          
+          .btn-primary-large {
+            padding: 1.5rem 4rem;
+            font-size: 1rem;
+            letter-spacing: 2px;
+          }
+        }
+
+        /* LARGE DESKTOP - 1400px and up */
+        @media (min-width: 1400px) {
+          .container {
+            padding: 0 4rem;
+          }
+          
+          .section-padding {
+            padding: 10rem 0;
+          }
         }
       `}</style>
     </main>

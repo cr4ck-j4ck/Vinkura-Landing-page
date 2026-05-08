@@ -422,7 +422,7 @@ const Navbar = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0.8rem 2.5rem;
+          padding: 0.8rem 3.5rem 0.8rem 2.5rem;
           background: rgba(255, 255, 255, 0.96) !important;
           backdrop-filter: blur(28px) saturate(180%);
           -webkit-backdrop-filter: blur(28px) saturate(180%);
@@ -520,6 +520,7 @@ const Navbar = () => {
           border-radius: 999px;
           font-size: 0.8rem;
           font-weight: 700;
+          margin-right: 0.5rem;
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           letter-spacing: 0.5px;
@@ -723,7 +724,7 @@ const Navbar = () => {
         .mobile-menu-overlay {
           position: fixed;
           inset: 0;
-          width: 100vw;
+          width: 100%;
           height: 100vh;
           background: #ffffff;
           z-index: 10000;
@@ -732,6 +733,15 @@ const Navbar = () => {
           visibility: hidden;
           transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
           overflow-y: auto;
+          overscroll-behavior: contain;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .mobile-menu-overlay::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+          display: none;
         }
 
         .mobile-menu-overlay.active {

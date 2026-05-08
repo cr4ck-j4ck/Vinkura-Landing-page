@@ -191,9 +191,36 @@ const SecurityUI = () => {
           .container { padding: 0 1.5rem; }
           .hero-section { padding: 80px 0 60px; }
           .hero-title { font-size: 2.25rem; }
+          .hero-subtext { font-size: 1rem; }
+          .info-section,
+          .architecture-section,
+          .terms-section,
+          .compliance-section,
+          .final-cta { padding: 64px 0; }
+          .section-headline { font-size: 2rem; margin-bottom: 1.5rem; }
+          .body-text,
+          .compliance-text,
+          .cta-desc { font-size: 0.98rem; }
+          .section-label { margin-bottom: 2rem; }
           .foundations-card { padding: 2.5rem; }
+          .card-label { margin-bottom: 2rem; }
+          .slash-list li { font-size: 0.98rem; margin-bottom: 1rem; }
           .arch-grid { grid-template-columns: 1fr; }
+          .arch-card { padding: 1.5rem; border: 1px solid #eee; border-radius: 14px; background: #fff; }
+          .arch-card h4 { font-size: 1.1rem; }
+          .terms-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+          .term-item h5 { font-size: 1rem; }
+          .term-item p { font-size: 0.95rem; }
+          .compliance-content { max-width: 100%; }
+          .compliance-chips { gap: 0.75rem; }
+          .compliance-chips span { width: 100%; text-align: center; }
+          .final-cta .grid-2 { gap: 2rem; }
           .cta-title { font-size: 2rem; }
+          .form-container { max-width: 100%; padding: 1.25rem; border-radius: 14px; }
+          .contact-form input[type="text"],
+          .contact-form input[type="email"],
+          .contact-form textarea,
+          .submit-input { font-size: 0.9rem; }
         }
       `}</style>
     </main>

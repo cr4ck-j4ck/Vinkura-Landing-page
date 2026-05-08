@@ -101,17 +101,17 @@ const SoftwareList = () => {
       <style jsx>{`
         .software-section {
           position: relative;
-          padding: 8rem 0;
+          padding: 1.5rem 0 6rem;
         }
         .section-subtitle {
           font-size: 1.16rem;
           font-weight: 700;
-          margin-bottom: 3rem;
+          margin-bottom: 2rem;
           text-transform: uppercase;
           letter-spacing: 3px;
           color: #999;
           border-top: 1px solid #eee;
-          padding-top: 2rem;
+          padding-top: 1.25rem;
           display: inline-block;
         }
         .container {
@@ -120,13 +120,13 @@ const SoftwareList = () => {
           padding: 0 4rem;
         }
         .software-intro {
-          margin-bottom: 4rem;
+          margin-bottom: 2rem;
         }
         .intro-text-premium {
           font-size: 1.76rem;
           line-height: 1.25;
           max-width: 1000px;
-          margin-bottom: 3rem;
+          margin-bottom: 1.5rem;
           font-family: var(--font-hero);
           font-weight: 400;
           letter-spacing: -1px;
@@ -216,10 +216,13 @@ const SoftwareList = () => {
         }
 
         @media (max-width: 768px) {
-          .container { padding: 0 2rem; }
-          .intro-text-premium { font-size: 1.5rem; }
-          .software-name { font-size: 2.5rem; letter-spacing: -1px; }
-          .software-item { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 2rem 0; }
+          .software-section { padding: 0.75rem 0 4rem; }
+          .container { padding: 0 1.25rem; }
+          .software-intro { margin-bottom: 1.25rem; }
+          .intro-text-premium { font-size: 1.2rem; margin-bottom: 1rem; }
+          .section-subtitle { margin-bottom: 1.25rem; padding-top: 1rem; }
+          .software-name { font-size: 2.1rem; letter-spacing: -1px; }
+          .software-item { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem 0; }
           .software-tag { max-width: 100%; order: 2; }
           .software-name { order: 1; }
           .hide-mobile { display: none !important; }

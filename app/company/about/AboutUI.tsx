@@ -14,12 +14,24 @@ const AboutUI = () => {
          return;
       }
 
-      const amount = Math.round(carousel.clientWidth * 0.88);
-
-      carousel.scrollBy({
-         left: direction === 'next' ? amount : -amount,
-         behavior: 'smooth',
-      });
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      const amount = Math.round(clientWidth * 0.88);
+      
+      if (direction === 'next') {
+         // Check if we are near the end (with 20px tolerance)
+         if (scrollLeft + clientWidth >= scrollWidth - 20) {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+         } else {
+            carousel.scrollBy({ left: amount, behavior: 'smooth' });
+         }
+      } else {
+         // Check if we are near the start (with 20px tolerance)
+         if (scrollLeft <= 20) {
+            carousel.scrollTo({ left: scrollWidth, behavior: 'smooth' });
+         } else {
+            carousel.scrollBy({ left: -amount, behavior: 'smooth' });
+         }
+      }
    };
 
    return (

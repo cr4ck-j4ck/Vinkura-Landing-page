@@ -316,7 +316,7 @@ const Navbar = () => {
           <div className="mobile-menu-header">
             <Link href="/" className="nav-logo" onClick={closeAllMenus}>
               <img src="/VINKURA.png" alt="VINKURA Logo" className="logo-img" />
-              <span style={{ marginLeft: '10px' }}>VINKURA</span>
+              <span style={{ marginLeft: '12px' }}>VINKURA</span>
             </Link>
 
             <button
@@ -728,7 +728,7 @@ const Navbar = () => {
           height: 100vh;
           background: #ffffff;
           z-index: 10000;
-          padding: 2rem;
+          padding: 0;
           opacity: 0;
           visibility: hidden;
           transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
@@ -753,19 +753,21 @@ const Navbar = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 3rem;
+          padding: 0.75rem 1.25rem;
+          margin-bottom: 2rem;
         }
 
         .mobile-close-btn {
           background: transparent;
           border: none;
           cursor: pointer;
-          font-size: 2.5rem;
           color: #000;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 8px;
+          width: 40px;
+          height: 36px; /* Match logo height to avoid pushing header height */
+          padding: 0;
           -webkit-tap-highlight-color: transparent;
           outline: none;
           line-height: 1;
@@ -775,12 +777,14 @@ const Navbar = () => {
           line-height: 1;
           display: inline-block;
           font-weight: 300;
-          padding-bottom: 4px;
+          font-size: 2.2rem;
+          margin-top: -4px;
         }
 
         .mobile-menu-content {
           display: flex;
           flex-direction: column;
+          padding: 0 1.25rem 3rem;
         }
 
         .mobile-nav-item {

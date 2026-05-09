@@ -953,7 +953,7 @@ const DDMSUI = () => {
           border-radius: 1rem;
           background: #fff;
           overflow: hidden;
-          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .faq-item[open] {
@@ -968,10 +968,11 @@ const DDMSUI = () => {
           justify-content: space-between;
           gap: 1rem;
           cursor: pointer;
-          padding: 1.15rem 1.25rem;
+          padding: 1.5rem;
           font-size: 1rem;
           font-weight: 600;
           color: #111;
+          user-select: none;
         }
 
         .faq-item summary::-webkit-details-marker {
@@ -1000,7 +1001,13 @@ const DDMSUI = () => {
         }
 
         .faq-answer {
-          padding: 0 1.25rem 1.15rem;
+          padding: 0 1.5rem 1.5rem;
+          animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .faq-answer p {

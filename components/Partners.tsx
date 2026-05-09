@@ -61,7 +61,7 @@ const Partners = () => {
                   display: i === currentIndex ? 'flex' : 'none'
                 }}
               >
-                <div className="partner-visual">
+                <div className={`partner-visual ${partner.company.includes('Bareilly') ? 'large-logo' : ''}`}>
                   <img src={partner.logo} alt={partner.company} className="partner-logo-img" />
                 </div>
                 <div className="quote-icon">“</div>
@@ -160,26 +160,30 @@ const Partners = () => {
         }
 
         .partner-visual {
-          width: 100px;
-          height: 100px;
+          width: 140px;
+          height: 140px;
           margin-bottom: 2.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .partner-visual.large-logo {
+          width: 280px;
+          height: 180px;
         }
         
         .partner-logo-img {
           max-width: 100%;
           max-height: 100%;
           object-fit: contain;
-          filter: grayscale(1);
-          opacity: 0.6;
+          opacity: 1;
           transition: all 0.5s ease;
         }
 
         .partner-card:hover .partner-logo-img {
-          filter: grayscale(0);
-          opacity: 1;
+          transform: scale(1.05);
         }
 
         .quote-icon {

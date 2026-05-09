@@ -35,10 +35,10 @@ const ResearchSection = () => {
   const scrollResearchCarousel = (direction: 'prev' | 'next') => {
     setActiveIndex((currentIndex) => {
       if (direction === 'next') {
-        return Math.min(currentIndex + 1, maxIndex);
+        return (currentIndex + 1) % researchItems.length;
       }
 
-      return Math.max(currentIndex - 1, 0);
+      return (currentIndex - 1 + researchItems.length) % researchItems.length;
     });
   };
 

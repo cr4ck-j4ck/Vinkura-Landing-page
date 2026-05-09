@@ -98,13 +98,25 @@ const FeaturedSection = () => {
                     >
                       <div className="desktop-overlay hide-mobile">
                         <span className="overlay-tag">{item.tag}</span>
-                        <h2 className="overlay-title">{item.title} ↗</h2>
+                        <h2 className="overlay-title">
+                          {item.title} 
+                          <svg width="0.6em" height="0.6em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '12px', display: 'inline-block' }}>
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                          </svg>
+                        </h2>
                       </div>
                     </div>
 
                     <div className="mobile-content show-mobile">
                       <span className="mobile-tag">{item.tag}</span>
-                      <h2 className="mobile-title">{item.title} ↗</h2>
+                      <h2 className="mobile-title">
+                        {item.title} 
+                        <svg width="0.8em" height="0.8em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', display: 'inline-block' }}>
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </h2>
                     </div>
                   </div>
                 </Link>

@@ -59,7 +59,7 @@ const SoftwareList = () => {
           <div style={{ marginBottom: '2rem' }}>
             <img src="/VINKURA.png" alt="Vinkura" style={{ height: '40px', width: 'auto' }} />
           </div>
-          <h3 className="section-subtitle">Our Software</h3>
+          <h2 className="section-subtitle">Our Software</h2>
         </div>
 
         <div className="software-items">
@@ -70,12 +70,15 @@ const SoftwareList = () => {
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
+                <h3 className="software-name">{product.name}</h3>
                 <div className="software-desc">
                   <p className="software-tag">{product.tagLine}</p>
                 </div>
-                <h2 className="software-name">{product.name}</h2>
                 <div className="software-arrow hide-mobile">
-                  <span className="arrow-char">↗</span>
+                  <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
                 </div>
               </div>
             </Link>
@@ -161,10 +164,7 @@ const SoftwareList = () => {
           max-width: 400px;
           line-height: 1.5;
         }
-        .arrow-char {
-          font-size: 2rem;
-          font-weight: 300;
-        }
+
         .software-arrow {
           color: #ccc;
           transition: transform 0.3s, color 0.3s;
@@ -221,10 +221,9 @@ const SoftwareList = () => {
           .software-intro { margin-bottom: 1.25rem; }
           .intro-text-premium { font-size: 1.2rem; margin-bottom: 1rem; }
           .section-subtitle { margin-bottom: 1.25rem; padding-top: 1rem; }
-          .software-name { font-size: 2.1rem; letter-spacing: -1px; }
           .software-item { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem 0; }
-          .software-tag { max-width: 100%; order: 2; }
-          .software-name { order: 1; }
+          .software-tag { max-width: 100%; }
+          .software-name { font-size: 2.1rem; letter-spacing: -1px; }
           .hide-mobile { display: none !important; }
         }
       `}</style>

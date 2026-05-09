@@ -47,7 +47,7 @@ const ResearchSection = () => {
       <div className="container">
         <div className="section-header mobile-carousel-header">
           <div className="carousel-heading-group">
-            <h3 className="section-subtitle">RESEARCH AND PRODUCTS</h3>
+            <h2 className="section-subtitle">RESEARCH AND PRODUCTS</h2>
             <p className="section-tagline">Building the foundations of operational reality.</p>
           </div>
           <div className="carousel-controls" aria-label="Research carousel controls">
@@ -57,7 +57,10 @@ const ResearchSection = () => {
               onClick={() => scrollResearchCarousel('prev')}
               aria-label="Previous research card"
             >
-              ←
+              <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
             </button>
             <button
               type="button"
@@ -65,7 +68,10 @@ const ResearchSection = () => {
               onClick={() => scrollResearchCarousel('next')}
               aria-label="Next research card"
             >
-              →
+              <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </div>
         </div>
@@ -80,7 +86,11 @@ const ResearchSection = () => {
                   <h4 className="card-title">{item.title}</h4>
                   <p className="card-desc">{item.desc}</p>
                   <Link href={item.link} className="card-link">
-                    View Record ↗
+                    View Record 
+                    <svg width="0.9em" height="0.9em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
                   </Link>
                 </div>
               </div>
@@ -91,7 +101,11 @@ const ResearchSection = () => {
 
         <div className="section-footer mt-16 text-center">
           <Link href="/case-studies" className="see-all-research-btn">
-            SEE ALL RESEARCH ↗
+            SEE ALL RESEARCH 
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '12px' }}>
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
           </Link>
         </div>
       </div>

@@ -49,12 +49,10 @@ export default function CaseStudyDetailUI({ data }: { data: CaseStudyData }) {
                </div>
             </section>
 
-            <section className="section-block border-t bg-black text-white full-width">
-               <div className="page-container">
-                  <div className="section-grid py-24">
-                     <div className="section-label-col"><h2 className="section-heading black">Operational Outcome</h2></div>
-                     <div className="section-content-col"><p className="section-body-large black">{data.outcome}</p></div>
-                  </div>
+            <section className="section-block border-t">
+               <div className="section-grid">
+                  <div className="section-label-col"><h2 className="section-heading">Operational Outcome</h2></div>
+                  <div className="section-content-col"><p className="section-body-large">{data.outcome}</p></div>
                </div>
             </section>
 
@@ -81,27 +79,32 @@ export default function CaseStudyDetailUI({ data }: { data: CaseStudyData }) {
          </div>
 
          <style jsx>{`
-        .page-shell { min-height: 100vh; background: #fdfdfc; color: #0a0a0a; font-family: var(--font-inter), sans-serif; }
+        .page-shell { min-height: 100vh; background: #fdfdfc; color: #0a0a0a; font-family: var(--font-inter), sans-serif; overflow-x: hidden; }
         .page-container { width: 100%; max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+        @media (max-width: 600px) { .page-container { padding-left: 20px; padding-right: 20px; } }
         .case-hero { padding-top: 180px; padding-bottom: 80px; }
-        .case-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(10,10,10,0.4); margin-bottom: 24px; display: block; }
-        .case-title { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; margin-bottom: 32px; font-family: var(--font-outfit), sans-serif; }
-        .case-subtitle { max-width: 700px; font-size: 1.5rem; line-height: 1.5; color: rgba(10,10,10,0.6); margin-bottom: 64px; font-weight: 300; }
-        .case-visual { width: 100%; border: 1px solid rgba(0,0,0,0.06); padding: 8px; }
+        .case-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(10,10,10,0.4); margin-bottom: 24px; display: block; }
+        .case-title { font-size: clamp(2.8rem, 8vw, 7rem); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; margin-bottom: 32px; font-family: var(--font-outfit), sans-serif; }
+        .case-subtitle { max-width: 700px; font-size: clamp(1.1rem, 3vw, 1.5rem); line-height: 1.5; color: rgba(10,10,10,0.6); margin-bottom: 64px; font-weight: 300; }
+        .case-visual { width: 100%; border: 1px solid rgba(0,0,0,0.06); padding: 8px; margin-bottom: 40px; }
         .visual-box { aspect-ratio: 21/9; background-size: cover; background-position: center; filter: grayscale(1); }
-        .section-block { padding: 120px 0; }
+        .section-block { padding: 140px 0; }
         .border-t { border-top: 1px solid rgba(0,0,0,0.06); }
         .full-width { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
-        .section-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; }
-        @media (max-width: 900px) { .section-grid { grid-template-columns: 1fr; gap: 32px; } .section-block { padding: 80px 0; } }
-        .section-heading { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; color: #000; }
-        .section-heading.white { color: rgba(255,255,255,0.5); }
-        .section-body-large { font-size: 2rem; line-height: 1.25; letter-spacing: -0.02em; color: #000; font-weight: 400; }
-        .section-body-large.white { color: #fff; }
-        .capability-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .section-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+        @media (max-width: 900px) { 
+           .section-grid { grid-template-columns: 1fr; gap: 32px; } 
+           .section-block { padding: 80px 0; } 
+           .case-hero { padding-top: 120px; padding-bottom: 40px; }
+           .case-subtitle { margin-bottom: 40px; }
+        }
+        .section-heading { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 800; color: rgba(0,0,0,0.5); margin-bottom: 12px; }
+        .section-body-large { font-size: clamp(1.15rem, 3vw, 2rem); line-height: 1.65; letter-spacing: -0.01em; color: #1a1a1a; font-weight: 400; max-width: 80ch; white-space: pre-line; }
+        .capability-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+        @media (max-width: 768px) { .capability-grid { gap: 40px; } }
         @media (max-width: 600px) { .capability-grid { grid-template-columns: 1fr; } }
-        .cap-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
-        .cap-body { font-size: 1rem; line-height: 1.6; color: rgba(10,10,10,0.6); font-weight: 300; }
+        .cap-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; color: #000; }
+        .cap-body { font-size: 1rem; line-height: 1.6; color: rgba(10,10,10,0.7); font-weight: 400; }
         .form-container { max-width: 600px; }
         .form-intro { font-size: 1.1rem; color: rgba(10,10,10,0.6); margin-bottom: 40px; }
         .deployment-form { display: flex; flex-direction: column; gap: 16px; }

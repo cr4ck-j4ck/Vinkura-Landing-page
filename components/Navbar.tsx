@@ -302,7 +302,10 @@ const Navbar = () => {
                     <span className="mega-item-desc">{child.desc}</span>
                   </div>
 
-                  <span className="mega-arrow-char">↗</span>
+                  <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mega-arrow">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
                 </Link>
               ))}
             </div>
@@ -711,8 +714,8 @@ const Navbar = () => {
 
         .mega-arrow {
           color: #000;
-          opacity: 0.3;
-          transition: all 0.25s ease;
+          opacity: 0.2;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           flex-shrink: 0;
         }
 

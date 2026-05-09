@@ -11,7 +11,12 @@ const CTA = () => {
              <span className="cta-label">Ready to see it in your department?</span>
              <h2 className="cta-heading">Request a Demo</h2>
           </div>
-          <span className="cta-arrow">→</span>
+          <span className="cta-arrow">
+            <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
         </div>
       </Link>
       <Link href="/contact" className="cta-box black">
@@ -20,7 +25,12 @@ const CTA = () => {
              <span className="cta-label">Building something for public infrastructure?</span>
              <h2 className="cta-heading">Talk to our team</h2>
           </div>
-          <span className="cta-arrow">→</span>
+          <span className="cta-arrow">
+            <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
         </div>
       </Link>
 

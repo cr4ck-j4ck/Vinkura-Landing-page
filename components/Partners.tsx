@@ -7,19 +7,19 @@ const partners = [
     company: "J&K Police", 
     logo: "/J&K.png",
     quote: "Trinetra provided a real-time operational picture during major official deployments that redefined our field coordination.",
-    link: "Official Record →"
+    link: "Official Record"
   },
   { 
     company: "Bareilly Traffic Police", 
     logo: "/BTP.png",
     quote: "The integration of digital identifiers into our evidence management has established absolute accountability across our repositories.",
-    link: "Deployment Log →"
+    link: "Deployment Log"
   },
   { 
     company: "Uttar Pradesh Police", 
     logo: "/UPP.png",
     quote: "Vinkura's personnel deployment systems have optimized our force allocation and standardized our administrative audit trails.",
-    link: "Strategic Report →"
+    link: "Strategic Report"
   }
 ];
 
@@ -40,13 +40,19 @@ const Partners = () => {
     <section className="partners-section">
       <div className="container">
         <div className="section-header mobile-carousel-header">
-          <h3 className="section-subtitle">VOICE OF OUR PARTNERS</h3>
+          <h2 className="section-subtitle">VOICE OF OUR PARTNERS</h2>
           <div className="carousel-controls" aria-label="Partner carousel controls">
             <button className="nav-btn prev" onClick={prev} aria-label="Previous partner">
-              <span className="nav-char">←</span>
+              <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
             </button>
             <button className="nav-btn next" onClick={next} aria-label="Next partner">
-              <span className="nav-char">→</span>
+              <svg width="1.2rem" height="1.2rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </button>
           </div>
         </div>
@@ -67,7 +73,13 @@ const Partners = () => {
                 <div className="quote-icon">“</div>
                 <div className="partner-brand">{partner.company}</div>
                 <p className="partner-quote">{partner.quote}</p>
-                <a href="/company/case-studies" className="partner-link">{partner.link}</a>
+                <a href="/company/case-studies" className="partner-link">
+                  {partner.link}
+                  <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '8px', verticalAlign: 'middle', display: 'inline-block' }}>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
               </div>
             ))}
           </div>
@@ -233,10 +245,7 @@ const Partners = () => {
           border-color: #000;
         }
 
-        .nav-char {
-          font-size: 1.5rem;
-          font-weight: 300;
-        }
+
         .nav-btn {
           background: none;
           border: none;
